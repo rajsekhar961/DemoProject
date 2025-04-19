@@ -1,14 +1,18 @@
 package StepDefinitions;
 
+import java.io.File;
+import java.io.IOException;
 import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
 import org.junit.rules.Timeout;
 import org.openqa.selenium.By;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-
+import org.apache.commons.io.FileUtils;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -33,10 +37,12 @@ public class LoginSteps {
 
 
 	@When("user enters username and password")
-	public void user_enters_username_and_password()
+	public void user_enters_username_and_password() throws IOException
 	{
 		driver.findElement(By.id("j_username")).sendKeys("Prasanth");
 		driver.findElement(By.id("j_password")).sendKeys("Prasanth@123");
+		File srcFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+		FileUtils.copyFile(srcFile, new File("C:\\Users\\Rajsekhar\\eclipse-workspace\\Project\\Screenshots\\screenshot.png"));
 
 	}
 
